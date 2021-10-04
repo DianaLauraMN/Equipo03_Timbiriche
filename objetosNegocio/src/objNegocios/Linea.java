@@ -15,9 +15,8 @@ public class Linea extends Figura {
 
     @Override
     public void pinta(Graphics g) {
-        Graphics2D dibuja = (Graphics2D) g;
-        g.drawLine(x, y , w, h);
-
+        Graphics2D pintor = (Graphics2D) g;
+        pintor.drawLine(x, y , w, h);
     }
 
 }
