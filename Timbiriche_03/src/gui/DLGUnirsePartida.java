@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JColorChooser;
-import javax.swing.colorchooser.ColorSelectionModel;
 import objNegocios.Configuracion;
 import objNegocios.Jugador;
 
