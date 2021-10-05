@@ -2,17 +2,17 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JColorChooser;
 import javax.swing.colorchooser.ColorSelectionModel;
+import objNegocios.Configuracion;
 import objNegocios.Jugador;
 
 public class DLGUnirsePartida extends javax.swing.JDialog {
 
     Color colorJugador;
-        
-    /**
-     * Creates new form Registro
-     */
+
     public DLGUnirsePartida(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -132,8 +132,12 @@ public class DLGUnirsePartida extends javax.swing.JDialog {
 
     private void BtnUnirseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUnirseActionPerformed
         Jugador jugador = new Jugador(txtNombreJugador.getText(), colorJugador, 0);
+        Configuracion configuracion = new Configuracion(colorJugador, jugador);
+        List<Configuracion> configuraciones = new ArrayList<>();
+        configuraciones.add(configuracion);
+        jugador.setConfiguraciones(configuraciones);
         DLGRegistro dlgRegistro = new DLGRegistro(null, true, jugador);
-        
+
     }//GEN-LAST:event_BtnUnirseActionPerformed
 
     private void btnColoreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColoreaActionPerformed
@@ -154,24 +158,42 @@ public class DLGUnirsePartida extends javax.swing.JDialog {
 
         g.fillOval(0, 0, 101, 101);
         this.pnl.paintComponents(g);
-      
+
         if (coloresInt[0] == 255 && coloresInt[1] == 255 && coloresInt[2] == 255) {
             BtnUnirse.setEnabled(false);
-        }else{
+        } else {
             BtnUnirse.setEnabled(true);
         }
+
+        camposCompletos();
     }//GEN-LAST:event_btnColoreaActionPerformed
 
     private void txtNombreJugadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreJugadorKeyReleased
         String nombre = txtNombreJugador.getText();
         nombre = nombre.trim();
-        
+
         if (nombre.isEmpty()) {
             btnColorea.setEnabled(false);
-        }else{
+        } else {
             btnColorea.setEnabled(true);
-        } 
+        }
+
+        camposCompletos();
     }//GEN-LAST:event_txtNombreJugadorKeyReleased
+
+    public boolean camposCompletos() {
+        Color color = new Color(255, 255, 255);
+
+        if (colorJugador != null) {
+            if (color.getRGB() == colorJugador.getRGB() || this.txtNombreJugador.getText().trim().isEmpty()) {
+                this.BtnUnirse.setEnabled(false);
+                return false;
+            }
+            this.BtnUnirse.setEnabled(true);
+            return true;
+        }
+        return false;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
