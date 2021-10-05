@@ -4,9 +4,12 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import javax.swing.JColorChooser;
 import javax.swing.colorchooser.ColorSelectionModel;
+import objNegocios.Jugador;
 
 public class DLGUnirsePartida extends javax.swing.JDialog {
 
+    Color colorJugador;
+        
     /**
      * Creates new form Registro
      */
@@ -16,7 +19,8 @@ public class DLGUnirsePartida extends javax.swing.JDialog {
 
         this.panel.getRootPane().setOpaque(false);
         this.panel.setBackground(new Color(0, 0, 0, 0));
-
+        btnColorea.setEnabled(false);
+        BtnUnirse.setEnabled(false);
         Color c = new Color(0, 0, 0, 0);
         this.pnl.setBackground(c);
         this.setVisible(true);
@@ -29,7 +33,7 @@ public class DLGUnirsePartida extends javax.swing.JDialog {
         panel = new javax.swing.JPanel();
         pnl = new javax.swing.JPanel();
         btnMinimizar = new javax.swing.JButton();
-        imgBtnUnirse = new javax.swing.JButton();
+        BtnUnirse = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
         btnColorea = new javax.swing.JButton();
         txtNombreJugador = new javax.swing.JTextField();
@@ -65,17 +69,17 @@ public class DLGUnirsePartida extends javax.swing.JDialog {
         btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         panel.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 10, 30, 30));
 
-        imgBtnUnirse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btbUnirse.png"))); // NOI18N
-        imgBtnUnirse.setBorder(null);
-        imgBtnUnirse.setBorderPainted(false);
-        imgBtnUnirse.setContentAreaFilled(false);
-        imgBtnUnirse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        imgBtnUnirse.addActionListener(new java.awt.event.ActionListener() {
+        BtnUnirse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btbUnirse.png"))); // NOI18N
+        BtnUnirse.setBorder(null);
+        BtnUnirse.setBorderPainted(false);
+        BtnUnirse.setContentAreaFilled(false);
+        BtnUnirse.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        BtnUnirse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                imgBtnUnirseActionPerformed(evt);
+                BtnUnirseActionPerformed(evt);
             }
         });
-        panel.add(imgBtnUnirse, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 550, 180, 60));
+        panel.add(BtnUnirse, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 550, 180, 60));
 
         btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btnCerrar.png"))); // NOI18N
         btnCerrar.setBorder(null);
@@ -93,7 +97,7 @@ public class DLGUnirsePartida extends javax.swing.JDialog {
         btnColorea.setBorder(null);
         btnColorea.setBorderPainted(false);
         btnColorea.setContentAreaFilled(false);
-        btnColorea.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnColorea.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnColorea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnColoreaActionPerformed(evt);
@@ -101,11 +105,15 @@ public class DLGUnirsePartida extends javax.swing.JDialog {
         });
         panel.add(btnColorea, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, 60, 50));
 
-        txtNombreJugador.setBackground(new java.awt.Color(255, 255, 255));
         txtNombreJugador.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtNombreJugador.setForeground(new java.awt.Color(53, 63, 75));
         txtNombreJugador.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtNombreJugador.setBorder(null);
+        txtNombreJugador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombreJugadorKeyReleased(evt);
+            }
+        });
         panel.add(txtNombreJugador, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 387, 140, 30));
 
         FONDO.setForeground(new java.awt.Color(53, 63, 75));
@@ -122,9 +130,11 @@ public class DLGUnirsePartida extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
-    private void imgBtnUnirseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imgBtnUnirseActionPerformed
-        DLGRegistro dlgRegistro = new DLGRegistro(null, true);
-    }//GEN-LAST:event_imgBtnUnirseActionPerformed
+    private void BtnUnirseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUnirseActionPerformed
+        Jugador jugador = new Jugador(txtNombreJugador.getText(), colorJugador, 0);
+        DLGRegistro dlgRegistro = new DLGRegistro(null, true, jugador);
+        
+    }//GEN-LAST:event_BtnUnirseActionPerformed
 
     private void btnColoreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColoreaActionPerformed
 
@@ -139,22 +149,37 @@ public class DLGUnirsePartida extends javax.swing.JDialog {
         };
 
         Graphics2D g = (Graphics2D) this.pnl.getGraphics();
-        Color colorJugador = new Color(coloresInt[0], coloresInt[1], coloresInt[2]);
+        colorJugador = new Color(coloresInt[0], coloresInt[1], coloresInt[2]);
         g.setColor(colorJugador);
 
         g.fillOval(0, 0, 101, 101);
         this.pnl.paintComponents(g);
-
-
+      
+        if (coloresInt[0] == 255 && coloresInt[1] == 255 && coloresInt[2] == 255) {
+            BtnUnirse.setEnabled(false);
+        }else{
+            BtnUnirse.setEnabled(true);
+        }
     }//GEN-LAST:event_btnColoreaActionPerformed
+
+    private void txtNombreJugadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreJugadorKeyReleased
+        String nombre = txtNombreJugador.getText();
+        nombre = nombre.trim();
+        
+        if (nombre.isEmpty()) {
+            btnColorea.setEnabled(false);
+        }else{
+            btnColorea.setEnabled(true);
+        } 
+    }//GEN-LAST:event_txtNombreJugadorKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnUnirse;
     private javax.swing.JLabel FONDO;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnColorea;
     private javax.swing.JButton btnMinimizar;
-    private javax.swing.JButton imgBtnUnirse;
     private javax.swing.JPanel panel;
     private javax.swing.JPanel pnl;
     private javax.swing.JTextField txtNombreJugador;

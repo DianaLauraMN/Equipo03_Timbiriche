@@ -3,13 +3,15 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import objNegocios.Jugador;
 
 public class DLGRegistro extends javax.swing.JDialog {
-
+    Jugador jugador;
+    
     /**
      * Creates new form Registro
      */
-    public DLGRegistro(java.awt.Frame parent, boolean modal) {
+    public DLGRegistro(java.awt.Frame parent, boolean modal, Jugador jugador) {
         super(parent, modal);
         initComponents();
         
@@ -19,13 +21,12 @@ public class DLGRegistro extends javax.swing.JDialog {
         
         this.panel.getRootPane().setOpaque(false);
         this.panel.setBackground(new Color(0, 0, 0, 0));
-        
+        this.jugador = jugador;
         Color c = new Color(0, 0, 0, 0);
         this.panelJugador1.setBackground(c);
         this.panelJugador2.setBackground(c);
         this.panelJugador3.setBackground(c);
         this.panelJugador4.setBackground(c);
-        
         
         this.setVisible(true);
     }
