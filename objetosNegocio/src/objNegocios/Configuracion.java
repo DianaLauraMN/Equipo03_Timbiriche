@@ -17,6 +17,7 @@ public class Configuracion {
     public Configuracion(Color color, Jugador jugador) {
         this.color = color;
         this.jugador = jugador;
+        this.jugador.setColor(color);
     }
 
     public Color getColor() {

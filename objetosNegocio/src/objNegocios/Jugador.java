@@ -9,21 +9,34 @@ import java.util.List;
  * @author chris
  */
 public class Jugador {
+
     private int id;
     private String nombre;
     private Color color;
-    private List figuras = new ArrayList<Figura>();
+    private List figuras;
     private int puntaje;
+    private List<Configuracion> configuraciones;
 
     public Jugador() {
+        this.figuras = new ArrayList<>();
+        this.configuraciones = new ArrayList<>();
     }
 
     public Jugador(String nombre, Color color, int puntaje) {
         this.nombre = nombre;
         this.color = color;
         this.puntaje = puntaje;
+        this.figuras = new ArrayList<>();
+        this.configuraciones = new ArrayList<>();
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getNombre() {
         return nombre;
     }
@@ -56,6 +69,15 @@ public class Jugador {
         this.puntaje = puntaje;
     }
 
+    public List<Configuracion> getConfiguraciones() {
+        return configuraciones;
+    }
+
+    public void setConfiguraciones(List<Configuracion> configuraciones) {
+        this.configuraciones = configuraciones;
+    }
+    
+    
     @Override
     public int hashCode() {
         int hash = 3;
