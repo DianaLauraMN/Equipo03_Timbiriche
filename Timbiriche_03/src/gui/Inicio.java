@@ -3,14 +3,11 @@ package gui;
 
 import java.awt.Color;
 
-/**
- *
- * @author Hector Zapata
- */
+
 public class Inicio extends javax.swing.JFrame {
 
     /**
-     * Creates new form Inicio
+     * Metodo constructor
      */
     public Inicio() {
         initComponents();
@@ -85,10 +82,18 @@ public class Inicio extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método para cerrar la ventana del juego
+     * @param evt 
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
      System.exit(0);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    /**
+     * Método que nos manda a la ventana "Unirse partida"
+     * @param evt 
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         DLGUnirsePartida dlgUnirsePartida = new DLGUnirsePartida(null, true);
     }//GEN-LAST:event_jButton2ActionPerformed
