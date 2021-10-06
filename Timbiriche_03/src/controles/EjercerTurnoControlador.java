@@ -5,13 +5,12 @@ import java.util.ArrayList;
 
 public class EjercerTurnoControlador {
 
-    public Point[] validaLinea(Point inicio, Point fin, Point[][] puntos) {
+    public Point[] validaLinea(Point inicio, Point fin, Point[][] puntos, int distancia) {
         boolean start = false, end = false;
-
         Point startPoint = null;
         Point endPoint = null;
         Point exacto[] = new Point[2];
-
+        //Valida que los puntos existan
         for (int i = 0; i < puntos.length; i++) {
             for (int j = 0; j < puntos[0].length; j++) {
                 int x1 = (int) inicio.getX();
@@ -50,6 +49,7 @@ public class EjercerTurnoControlador {
             }
         }
 
+        //Valida que no sea una diagonal
         if (startPoint != null && endPoint != null) {
             int x1 = (int) startPoint.getX();
             int y1 = (int) startPoint.getY();
@@ -58,10 +58,12 @@ public class EjercerTurnoControlador {
             if ((x1 != x2) && (y1 != y2)) {
                 startPoint = null;
                 endPoint = null;
-                System.out.println("Diagonal");
+            }
+            if (((x2 > (x1 + distancia + 2)) || (x2 < (x1 - distancia - 2))) || ((y2 > (y1 + distancia + 2)) || (y2 < (y1 - distancia - 2)))) {
+                startPoint = null;
+                endPoint = null;
             }
         }
-
         exacto[0] = startPoint;
         exacto[1] = endPoint;
 

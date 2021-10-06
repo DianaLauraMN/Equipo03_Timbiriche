@@ -17,7 +17,7 @@ public class DLGPartida extends javax.swing.JDialog {
     int numJugadores;
 
     int click = 0;
-
+    int tam;
     Point[][] puntos;
 
     EjercerTurnoControlador controlTurno = new EjercerTurnoControlador();
@@ -334,7 +334,7 @@ public class DLGPartida extends javax.swing.JDialog {
 
     private void iniciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciaActionPerformed
 
-        int tam = 0;
+        tam = 0;
         if (numJugadores == 2) {
             tam = 10;
         } else if (numJugadores == 3) {
@@ -358,7 +358,14 @@ public class DLGPartida extends javax.swing.JDialog {
         } else if (click == 2) {
             end.setLocation(x, y);
 
-            Point exacto[] = controlTurno.validaLinea(start, end, puntos);
+            int xL = 10;
+            int xR = this.tablero.getWidth() - 20;
+            int yT = 10;
+
+            double distancia = Math.sqrt(Math.pow((xL - xR), 2) + Math.pow((yT - yT), 2));
+            double dist = distancia / (tam - 1);
+
+            Point exacto[] = controlTurno.validaLinea(start, end, puntos, (int) dist);
 
             if (exacto[0] != null && exacto[1] != null) {
                 pintaLinea(exacto[0], exacto[1]);
@@ -387,20 +394,18 @@ public class DLGPartida extends javax.swing.JDialog {
             for (int j = 0; j <= tam - 1; j++) {
                 g.fillOval((int) (xL + dist * j), (int) (yT + dist * i), 5, 5);
                 Point punto = new Point((int) (xL + dist * j), (int) (yT + dist * i));
-                
+
                 puntos[i][j] = punto;
 
             }
         }
-        
-        
+
         for (int i = 0; i < puntos.length; i++) {
             for (int j = 0; j < puntos[0].length; j++) {
-                System.out.print("["+puntos[i][j].getX()+", "+puntos[i][j].getY()+"]");
+                System.out.print("[" + puntos[i][j].getX() + ", " + puntos[i][j].getY() + "]");
             }
             System.out.println("");
         }
-        
 
         this.tablero.paintComponents(g);
         //---------------------------------------------------
