@@ -1,6 +1,7 @@
 package gui;
 
 import controles.ComenzarPartidaControlador;
+import facade.ServerRender;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -276,7 +277,7 @@ public class DLGRegistro extends javax.swing.JDialog {
      */
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
 
-       control.comenzarPartida(jugadores.get(0));
+       control.comenzarPartida(jugadores);
     }//GEN-LAST:event_btnIniciarActionPerformed
    
     /**
@@ -295,7 +296,7 @@ public class DLGRegistro extends javax.swing.JDialog {
         Color colorJugador = new Color(coloresInt[0], coloresInt[1], coloresInt[2]);
 
         this.panelJugador1.setBackground(colorJugador);
-
+        
         if (panelJugador1.getBackground().getRGB() == Color.white.getRGB()) {
             btnIniciar.setEnabled(false);
             jLabel1.setIcon(new ImageIcon("src/img/CJugadorDesactivado.png"));
@@ -322,7 +323,12 @@ public class DLGRegistro extends javax.swing.JDialog {
         };
         Color colorJugador = new Color(coloresInt[0], coloresInt[1], coloresInt[2]);
         this.panelJugador2.setBackground(colorJugador);
-
+        
+        Jugador temp = jugadores.get(1);
+        jugadores.remove(1);
+        temp.setColor(colorJugador);
+        jugadores.add(1, temp);
+        
         if (panelJugador2.getBackground().getRGB() == Color.white.getRGB()) {
             btnIniciar.setEnabled(false);
         } else {
@@ -345,7 +351,12 @@ public class DLGRegistro extends javax.swing.JDialog {
         };
         Color colorJugador = new Color(coloresInt[0], coloresInt[1], coloresInt[2]);
         this.panelJugador3.setBackground(colorJugador);
-
+        
+        Jugador temp = jugadores.get(1);
+        jugadores.remove(2);
+        temp.setColor(colorJugador);
+        jugadores.add(2, temp);
+        
         if (panelJugador3.getBackground().getRGB() == Color.white.getRGB()) {
             btnIniciar.setEnabled(false);
         } else {
@@ -368,7 +379,12 @@ public class DLGRegistro extends javax.swing.JDialog {
         };
         Color colorJugador = new Color(coloresInt[0], coloresInt[1], coloresInt[2]);
         this.panelJugador4.setBackground(colorJugador);
-
+        
+        Jugador temp = jugadores.get(1);
+        jugadores.remove(3);
+        temp.setColor(colorJugador);
+        jugadores.add(3, temp);
+        
         if (panelJugador4.getBackground().getRGB() == Color.white.getRGB()) {
             btnIniciar.setEnabled(false);
         } else {
@@ -498,4 +514,5 @@ public class DLGRegistro extends javax.swing.JDialog {
     private javax.swing.JTextField txtJ3Nombre;
     private javax.swing.JTextField txtJ4Nombre;
     // End of variables declaration//GEN-END:variables
+    private ServerRender sr = ServerRender.getInstancia();
 }

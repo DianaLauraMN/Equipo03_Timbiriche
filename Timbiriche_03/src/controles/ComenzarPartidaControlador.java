@@ -10,10 +10,10 @@ public class ComenzarPartidaControlador {
 
     private ServerRender sr = ServerRender.getInstancia();
 
-    public void  comenzarPartida(Jugador j) {
+    public void  comenzarPartida(ArrayList jugadores) {
         sr.aprobacionPartida();
-        ArrayList<Jugador> jugadores = sr.renderJugadores();
-        jugadores.add(0, j);
+//        ArrayList<Jugador> jugadores = sr.renderJugadores();
+//        jugadores.add(0, j);
 
         
          DLGPartida dlgPartida = new DLGPartida(null, true, jugadores);

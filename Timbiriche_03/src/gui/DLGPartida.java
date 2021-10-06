@@ -16,7 +16,7 @@ public class DLGPartida extends javax.swing.JDialog {
     Point start = new Point();
     Point end = new Point();
     int numJugadores;
-   List<Figura> lineasJugador = new ArrayList();
+    List<Figura> lineasJugador = new ArrayList();
     int click = 0;
     int tam;
     Point[][] puntos;

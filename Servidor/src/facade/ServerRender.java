@@ -2,7 +2,6 @@
 package facade;
 
 import java.util.ArrayList;
-import javax.swing.JLabel;
 import logica.Server;
 import objNegocios.Jugador;
 
