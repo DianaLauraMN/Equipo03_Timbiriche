@@ -2,6 +2,9 @@ package gui;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.ImageIcon;
+import objNegocios.Configuracion;
 import objNegocios.Jugador;
 
 public class DLGRegistro extends javax.swing.JDialog {
@@ -26,6 +29,11 @@ public class DLGRegistro extends javax.swing.JDialog {
             this.panelJugador4.setBackground(jugadores.get(3).getColor());
         } catch (Exception e) {
         }
+        llenaCampos(jugadores);
+
+        if (btnIniciar.isEnabled()) {
+            jLabel1.setIcon(new ImageIcon("src/img/CartaJugador-acepto.png"));
+        }
         this.setVisible(true);
 
     }
@@ -43,13 +51,20 @@ public class DLGRegistro extends javax.swing.JDialog {
         colorJugador2 = new javax.swing.JButton();
         colorJugador3 = new javax.swing.JButton();
         colorJugador4 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        txtJ1Nombre = new javax.swing.JTextField();
+        lblJ1Nombre = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        txtJ2Nombre = new javax.swing.JTextField();
+        lblJ2Nombre = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtJ3Nombre = new javax.swing.JTextField();
+        lblJ3Nombre = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtJ4Nombre = new javax.swing.JTextField();
+        lblJ4Nombre = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnIniciar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         FONDO = new javax.swing.JLabel();
@@ -61,77 +76,143 @@ public class DLGRegistro extends javax.swing.JDialog {
         panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelJugador2.setBackground(new java.awt.Color(255, 255, 255));
-        panel.add(panelJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(383, 226, 110, 110));
+        panel.add(panelJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, 110, 110));
 
         panelJugador3.setBackground(new java.awt.Color(255, 255, 255));
-        panel.add(panelJugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(613, 226, 110, 110));
+        panel.add(panelJugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 220, 110, 110));
 
         panelJugador4.setBackground(new java.awt.Color(255, 255, 255));
-        panel.add(panelJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(843, 226, 110, 110));
+        panel.add(panelJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 220, 110, 110));
 
         panelJugador1.setBackground(new java.awt.Color(255, 255, 255));
-        panel.add(panelJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 226, 110, 110));
+        panel.add(panelJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 110, 110));
 
         colorJugador1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btnColor_1.png"))); // NOI18N
         colorJugador1.setBorder(null);
         colorJugador1.setBorderPainted(false);
         colorJugador1.setContentAreaFilled(false);
         colorJugador1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        colorJugador1.setEnabled(false);
         colorJugador1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 colorJugador1ActionPerformed(evt);
             }
         });
-        panel.add(colorJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 420, 70, 40));
+        panel.add(colorJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, 70, 40));
 
         colorJugador2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btnColor_1.png"))); // NOI18N
         colorJugador2.setBorder(null);
         colorJugador2.setBorderPainted(false);
         colorJugador2.setContentAreaFilled(false);
         colorJugador2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        colorJugador2.setEnabled(false);
         colorJugador2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 colorJugador2ActionPerformed(evt);
             }
         });
-        panel.add(colorJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 420, 70, 40));
+        panel.add(colorJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 420, 70, 40));
 
         colorJugador3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btnColor_1.png"))); // NOI18N
         colorJugador3.setBorder(null);
-        colorJugador3.setBorderPainted(false);
         colorJugador3.setContentAreaFilled(false);
         colorJugador3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        colorJugador3.setEnabled(false);
         colorJugador3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 colorJugador3ActionPerformed(evt);
             }
         });
-        panel.add(colorJugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 420, 70, 40));
+        panel.add(colorJugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 420, 70, 40));
 
         colorJugador4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btnColor_1.png"))); // NOI18N
         colorJugador4.setBorder(null);
         colorJugador4.setBorderPainted(false);
         colorJugador4.setContentAreaFilled(false);
         colorJugador4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        colorJugador4.setEnabled(false);
         colorJugador4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 colorJugador4ActionPerformed(evt);
             }
         });
-        panel.add(colorJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 420, 70, 40));
+        panel.add(colorJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 420, 70, 40));
+
+        txtJ1Nombre.setEditable(false);
+        txtJ1Nombre.setBackground(new java.awt.Color(255, 255, 255));
+        txtJ1Nombre.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        txtJ1Nombre.setForeground(new java.awt.Color(53, 63, 75));
+        txtJ1Nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtJ1Nombre.setBorder(null);
+        txtJ1Nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtJ1NombreKeyReleased(evt);
+            }
+        });
+        panel.add(txtJ1Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 130, 30));
+
+        lblJ1Nombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Nombre .png"))); // NOI18N
+        panel.add(lblJ1Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, 170, 50));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/CartaJugador.png"))); // NOI18N
+        panel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 190, 320));
+
+        txtJ2Nombre.setEditable(false);
+        txtJ2Nombre.setBackground(new java.awt.Color(255, 255, 255));
+        txtJ2Nombre.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        txtJ2Nombre.setForeground(new java.awt.Color(53, 63, 75));
+        txtJ2Nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtJ2Nombre.setBorder(null);
+        txtJ2Nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtJ2NombreKeyReleased(evt);
+            }
+        });
+        panel.add(txtJ2Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, 120, 30));
+
+        lblJ2Nombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Nombre .png"))); // NOI18N
+        panel.add(lblJ2Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 360, 160, 50));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/CartaJugador.png"))); // NOI18N
-        panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 190, 320));
+        panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 190, 320));
+
+        txtJ3Nombre.setEditable(false);
+        txtJ3Nombre.setBackground(new java.awt.Color(255, 255, 255));
+        txtJ3Nombre.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        txtJ3Nombre.setForeground(new java.awt.Color(53, 63, 75));
+        txtJ3Nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtJ3Nombre.setBorder(null);
+        txtJ3Nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtJ3NombreKeyReleased(evt);
+            }
+        });
+        panel.add(txtJ3Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 370, 120, 30));
+
+        lblJ3Nombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Nombre .png"))); // NOI18N
+        panel.add(lblJ3Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 360, 160, 50));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/CartaJugador.png"))); // NOI18N
-        panel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 190, 190, 320));
+        panel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, 190, 320));
+
+        txtJ4Nombre.setEditable(false);
+        txtJ4Nombre.setBackground(new java.awt.Color(255, 255, 255));
+        txtJ4Nombre.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        txtJ4Nombre.setForeground(new java.awt.Color(53, 63, 75));
+        txtJ4Nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtJ4Nombre.setBorder(null);
+        txtJ4Nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtJ4NombreKeyReleased(evt);
+            }
+        });
+        panel.add(txtJ4Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 370, 120, 30));
+
+        lblJ4Nombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Nombre .png"))); // NOI18N
+        panel.add(lblJ4Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 360, 160, 50));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/CJugadorDesactivado.png"))); // NOI18N
-        panel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 190, 190, 320));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/CartaJugador.png"))); // NOI18N
-        panel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 190, 320));
-        panel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, 60, 30));
+        panel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 190, 190, 320));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btnMinimizar.png"))); // NOI18N
         jButton1.setBorder(null);
@@ -140,17 +221,17 @@ public class DLGRegistro extends javax.swing.JDialog {
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         panel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 10, 30, 30));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btnIniciar.png"))); // NOI18N
-        jButton2.setBorder(null);
-        jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnIniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btnIniciar.png"))); // NOI18N
+        btnIniciar.setBorder(null);
+        btnIniciar.setBorderPainted(false);
+        btnIniciar.setContentAreaFilled(false);
+        btnIniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnIniciarActionPerformed(evt);
             }
         });
-        panel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 570, 180, 60));
+        panel.add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 570, 180, 60));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btnCerrar.png"))); // NOI18N
         jButton3.setBorder(null);
@@ -180,9 +261,21 @@ public class DLGRegistro extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
+//       Color color = new Color(panelJugador1.getColorModel().getRGB(0));
+//       Jugador jugador = new Jugador(txtJ1Nombre.getText(), color, 0);
+//        Configuracion configuracion = new Configuracion(colorJugador, jugador);
+//        List<Configuracion> configuraciones = new ArrayList<>();
+//        configuraciones.add(configuracion);
+//        jugador.setConfiguraciones(configuraciones);
+//        
+//        
+//        
+//        control.unirsePartida(jugador);
+        
         DLGPartida dlgpartida = new DLGPartida(null, true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+
+    }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void colorJugador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJugador1ActionPerformed
         StringBuffer colores = new StringBuffer();
@@ -194,7 +287,18 @@ public class DLGRegistro extends javax.swing.JDialog {
             Integer.parseInt(coloresPos[2])
         };
         Color colorJugador = new Color(coloresInt[0], coloresInt[1], coloresInt[2]);
+
         this.panelJugador1.setBackground(colorJugador);
+
+        if (panelJugador1.getBackground().getRGB() == Color.white.getRGB()) {
+            btnIniciar.setEnabled(false);
+            jLabel1.setIcon(new ImageIcon("src/img/CJugadorDesactivado.png"));
+
+        } else {
+            btnIniciar.setEnabled(true);
+        }
+
+
     }//GEN-LAST:event_colorJugador1ActionPerformed
 
     private void colorJugador2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJugador2ActionPerformed
@@ -208,6 +312,12 @@ public class DLGRegistro extends javax.swing.JDialog {
         };
         Color colorJugador = new Color(coloresInt[0], coloresInt[1], coloresInt[2]);
         this.panelJugador2.setBackground(colorJugador);
+
+        if (panelJugador2.getBackground().getRGB() == Color.white.getRGB()) {
+            btnIniciar.setEnabled(false);
+        } else {
+            btnIniciar.setEnabled(true);
+        }
     }//GEN-LAST:event_colorJugador2ActionPerformed
 
     private void colorJugador3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJugador3ActionPerformed
@@ -221,6 +331,12 @@ public class DLGRegistro extends javax.swing.JDialog {
         };
         Color colorJugador = new Color(coloresInt[0], coloresInt[1], coloresInt[2]);
         this.panelJugador3.setBackground(colorJugador);
+
+        if (panelJugador3.getBackground().getRGB() == Color.white.getRGB()) {
+            btnIniciar.setEnabled(false);
+        } else {
+            btnIniciar.setEnabled(true);
+        }
     }//GEN-LAST:event_colorJugador3ActionPerformed
 
     private void colorJugador4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJugador4ActionPerformed
@@ -234,27 +350,130 @@ public class DLGRegistro extends javax.swing.JDialog {
         };
         Color colorJugador = new Color(coloresInt[0], coloresInt[1], coloresInt[2]);
         this.panelJugador4.setBackground(colorJugador);
+
+        if (panelJugador4.getBackground().getRGB() == Color.white.getRGB()) {
+            btnIniciar.setEnabled(false);
+        } else {
+            btnIniciar.setEnabled(true);
+        }
     }//GEN-LAST:event_colorJugador4ActionPerformed
-  
+
+    private void txtJ1NombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJ1NombreKeyReleased
+        String nombre = txtJ1Nombre.getText();
+        nombre = nombre.trim();
+
+        if (nombre.isEmpty()) {
+            btnIniciar.setEnabled(false);
+            jLabel1.setIcon(new ImageIcon("src/img/CJugadorDesactivado.png"));
+        } else {
+            btnIniciar.setEnabled(true);
+        }
+    }//GEN-LAST:event_txtJ1NombreKeyReleased
+
+    private void txtJ2NombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJ2NombreKeyReleased
+        String nombre = txtJ2Nombre.getText();
+        nombre = nombre.trim();
+
+        if (nombre.isEmpty()) {
+            btnIniciar.setEnabled(false);
+        } else {
+            btnIniciar.setEnabled(true);
+        }
+    }//GEN-LAST:event_txtJ2NombreKeyReleased
+
+    private void txtJ3NombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJ3NombreKeyReleased
+        String nombre = txtJ3Nombre.getText();
+        nombre = nombre.trim();
+
+        if (nombre.isEmpty()) {
+            btnIniciar.setEnabled(false);
+        } else {
+            btnIniciar.setEnabled(true);
+        }
+    }//GEN-LAST:event_txtJ3NombreKeyReleased
+
+    private void txtJ4NombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJ4NombreKeyReleased
+        String nombre = txtJ4Nombre.getText();
+        nombre = nombre.trim();
+
+        if (nombre.isEmpty()) {
+            btnIniciar.setEnabled(false);
+        } else {
+            btnIniciar.setEnabled(true);
+        }
+    }//GEN-LAST:event_txtJ4NombreKeyReleased
+
+    public void llenaCampos(ArrayList<Jugador> jugadores) {
+        try {
+            if (jugadores.get(0) != null) {
+                if (!jugadores.get(0).getNombre().isEmpty()) {
+                    txtJ1Nombre.setText(jugadores.get(0).getNombre());
+                    txtJ1Nombre.setEditable(true);
+                    colorJugador1.setEnabled(true);
+                    if (jugadores.get(0).getColor() != Color.white) {
+                        btnIniciar.setEnabled(true);
+                    }
+                }
+            }
+            if (jugadores.get(1) != null) {
+                if (!jugadores.get(1).getNombre().isEmpty()) {
+                    txtJ2Nombre.setText(jugadores.get(1).getNombre());
+                    txtJ2Nombre.setEditable(true);
+                    colorJugador2.setEnabled(true);
+                    if (jugadores.get(1).getColor() != Color.white) {
+                        btnIniciar.setEnabled(true);
+                    }
+                }
+            }
+            if (jugadores.get(2) != null) {
+                if (!jugadores.get(2).getNombre().isEmpty()) {
+                    txtJ3Nombre.setText(jugadores.get(2).getNombre());
+                    txtJ3Nombre.setEditable(true);
+                    colorJugador3.setEnabled(true);
+                    if (jugadores.get(2).getColor() != Color.white) {
+                        btnIniciar.setEnabled(true);
+                    }
+                }
+            }
+            if (jugadores.get(3) != null) {
+                if (!jugadores.get(3).getNombre().isEmpty()) {
+                    txtJ4Nombre.setText(jugadores.get(3).getNombre());
+                    txtJ4Nombre.setEditable(true);
+                    colorJugador4.setEnabled(true);
+                    if (jugadores.get(3).getColor() != Color.white) {
+                        btnIniciar.setEnabled(true);
+                    }
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel FONDO;
+    private javax.swing.JButton btnIniciar;
     private javax.swing.JButton colorJugador1;
     private javax.swing.JButton colorJugador2;
     private javax.swing.JButton colorJugador3;
     private javax.swing.JButton colorJugador4;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel lblJ1Nombre;
+    private javax.swing.JLabel lblJ2Nombre;
+    private javax.swing.JLabel lblJ3Nombre;
+    private javax.swing.JLabel lblJ4Nombre;
     private javax.swing.JPanel panel;
     private javax.swing.JPanel panelJugador1;
     private javax.swing.JPanel panelJugador2;
     private javax.swing.JPanel panelJugador3;
     private javax.swing.JPanel panelJugador4;
+    private javax.swing.JTextField txtJ1Nombre;
+    private javax.swing.JTextField txtJ2Nombre;
+    private javax.swing.JTextField txtJ3Nombre;
+    private javax.swing.JTextField txtJ4Nombre;
     // End of variables declaration//GEN-END:variables
 }

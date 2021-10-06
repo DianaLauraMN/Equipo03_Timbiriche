@@ -2,6 +2,8 @@ package logica;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import objNegocios.Configuracion;
 import objNegocios.Jugador;
 
@@ -31,10 +33,24 @@ public class Server {
         }
 
         return jugadores;
-        
-       
-        
+
     }
-    
-   
+
+    public boolean aprobacionPartida(JLabel lb1, JLabel lb2) {
+        try {
+            if (lb1 != null) {
+                Thread.sleep(2000);
+                lb1.setIcon(new ImageIcon("src/img/CartaJugador-acepto.png"));
+            }
+            if (lb2 != null) {
+                Thread.sleep(2000);
+                lb2.setIcon(new ImageIcon("src/img/CartaJugador-acepto.png"));
+            }
+
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
+        return true;
+    }
+
 }
