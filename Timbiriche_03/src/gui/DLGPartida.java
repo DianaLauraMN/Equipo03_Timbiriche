@@ -8,6 +8,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import objNegocios.Jugador;
 
 /**
  *
@@ -23,13 +24,15 @@ public class DLGPartida extends javax.swing.JDialog {
      */
     Point start = new Point();
     Point end = new Point();
+    Jugador jugador;
 
-    public DLGPartida(java.awt.Frame parent, boolean modal) {
+    public DLGPartida(java.awt.Frame parent, boolean modal, Jugador jugador) {
         super(parent, modal);
         initComponents();
 
         
-
+        this.jugador= jugador;
+        System.out.println(jugador.getNombre());
         Color c = new Color(0, 0, 0, 0);
         this.panelJugador1.setBackground(c);
         this.panelJugador2.setBackground(c);

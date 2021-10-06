@@ -263,18 +263,18 @@ public class DLGRegistro extends javax.swing.JDialog {
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
 
         jLabel1.setIcon(new ImageIcon("src/img/CartaJugador-acepto.png"));
-
-        try {
-            Thread.sleep(2000);
-            jLabel3.setIcon(new ImageIcon("src/img/CartaJugador-acepto.png"));
-            Thread.sleep(2000);
-            jLabel2.setIcon(new ImageIcon("src/img/CartaJugador-acepto.png"));
-
-        } catch (InterruptedException e) {
-            System.out.println(e);
-        }
+        iniciar();
+        jugadores.get(0).setNombre(txtJ1Nombre.getText());
+        jugadores.get(0).setColor(panelJugador1.getBackground());
+        
+        DLGPartida dlgPartida = new DLGPartida(null, true, jugadores.get(0));
     }//GEN-LAST:event_btnIniciarActionPerformed
-
+    public void iniciar() {
+        control.comenzarPartida();
+        jLabel3.setIcon(new ImageIcon("src/img/CartaJugador-acepto.png"));
+        control.comenzarPartida();
+        jLabel2.setIcon(new ImageIcon("src/img/CartaJugador-acepto.png"));
+    }
     private void colorJugador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJugador1ActionPerformed
         StringBuffer colores = new StringBuffer();
         DLGColor dlg = new DLGColor(null, true, colores);
