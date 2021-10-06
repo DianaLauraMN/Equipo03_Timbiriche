@@ -13,6 +13,12 @@ public class DLGRegistro extends javax.swing.JDialog {
     ArrayList<Jugador> jugadores;
     ComenzarPartidaControlador control = new ComenzarPartidaControlador();
 
+    /**
+     * Método constructor
+     * @param parent
+     * @param modal
+     * @param jugadores 
+     */
     public DLGRegistro(java.awt.Frame parent, boolean modal, ArrayList<Jugador> jugadores) {
         super(parent, modal);
         initComponents();
@@ -256,17 +262,27 @@ public class DLGRegistro extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método que cierra la ventana
+     * @param evt 
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    /**
+     * Método con el cual iniciamos la partida
+     * @param evt 
+     */
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
 
-     
-        
        control.comenzarPartida(jugadores.get(0));
     }//GEN-LAST:event_btnIniciarActionPerformed
    
+    /**
+     * Método que crea un DLGColor para que el jugador #1 pueda seleccionar su color
+     * @param evt 
+     */
     private void colorJugador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJugador1ActionPerformed
         StringBuffer colores = new StringBuffer();
         DLGColor dlg = new DLGColor(null, true, colores);
@@ -291,6 +307,10 @@ public class DLGRegistro extends javax.swing.JDialog {
 
     }//GEN-LAST:event_colorJugador1ActionPerformed
 
+    /**
+     * Método para seleccionar el color que queremos ver en el jugador #2
+     * @param evt 
+     */
     private void colorJugador2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJugador2ActionPerformed
         StringBuffer colores = new StringBuffer();
         DLGColor dlg = new DLGColor(null, true, colores);
@@ -310,6 +330,10 @@ public class DLGRegistro extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_colorJugador2ActionPerformed
 
+    /**
+     * Método para seleccionar el color que queremos ver en el jugador #3
+     * @param evt 
+     */
     private void colorJugador3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJugador3ActionPerformed
         StringBuffer colores = new StringBuffer();
         DLGColor dlg = new DLGColor(null, true, colores);
@@ -329,6 +353,10 @@ public class DLGRegistro extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_colorJugador3ActionPerformed
 
+    /**
+     * Método para seleccionar el color que queremos ver en el jugador #4
+     * @param evt 
+     */
     private void colorJugador4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJugador4ActionPerformed
         StringBuffer colores = new StringBuffer();
         DLGColor dlg = new DLGColor(null, true, colores);
@@ -348,6 +376,10 @@ public class DLGRegistro extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_colorJugador4ActionPerformed
 
+    /**
+     * Se guarda el nombre del jugador #1
+     * @param evt 
+     */
     private void txtJ1NombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJ1NombreKeyReleased
         String nombre = txtJ1Nombre.getText();
         nombre = nombre.trim();

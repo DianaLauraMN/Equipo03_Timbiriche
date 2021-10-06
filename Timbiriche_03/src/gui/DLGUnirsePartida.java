@@ -13,6 +13,11 @@ public class DLGUnirsePartida extends javax.swing.JDialog {
     Color colorJugador;
     UnirsePartidaControlador control = new UnirsePartidaControlador();
     
+    /**
+     * Método constructor
+     * @param parent
+     * @param modal 
+     */
     public DLGUnirsePartida(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -126,10 +131,18 @@ public class DLGUnirsePartida extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método para cerrar la ventana
+     * @param evt 
+     */
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
+    /**
+     * Método oyente del boton "Unirse" que hace que nos unamos a la partida
+     * @param evt 
+     */
     private void BtnUnirseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUnirseActionPerformed
         
         Jugador jugador = new Jugador(txtNombreJugador.getText(), colorJugador, 0);
@@ -143,6 +156,10 @@ public class DLGUnirsePartida extends javax.swing.JDialog {
         control.unirsePartida(jugador);
     }//GEN-LAST:event_BtnUnirseActionPerformed
 
+    /**
+     * Método para seleccionar el color con el que nos queremos ver en la partida
+     * @param evt 
+     */
     private void btnColoreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColoreaActionPerformed
         
         StringBuffer colores = new StringBuffer();
@@ -168,6 +185,10 @@ public class DLGUnirsePartida extends javax.swing.JDialog {
         camposCompletos();
     }//GEN-LAST:event_btnColoreaActionPerformed
 
+    /**
+     * Metodo para poner y guardar nuestro nombre en la partida
+     * @param evt 
+     */
     private void txtNombreJugadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreJugadorKeyReleased
         String nombre = txtNombreJugador.getText();
         nombre = nombre.trim();
@@ -181,6 +202,10 @@ public class DLGUnirsePartida extends javax.swing.JDialog {
         camposCompletos();
     }//GEN-LAST:event_txtNombreJugadorKeyReleased
     
+    /**
+     * Método para verificar que todos los campos estén completos
+     * @return 
+     */
     public boolean camposCompletos() {
         Color color = new Color(255, 255, 255);
         
