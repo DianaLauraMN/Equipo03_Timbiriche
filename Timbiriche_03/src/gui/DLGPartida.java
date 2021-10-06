@@ -14,10 +14,14 @@ public class DLGPartida extends javax.swing.JDialog {
 
     Point start = new Point();
     Point end = new Point();
+    int numJugadores;
 
-    ArrayList<Point> puntos = new ArrayList<>();
-    ArrayList<Point> disponibles = new ArrayList<>();
+    int click = 0;
+
+    Point[][] puntos;
+
     EjercerTurnoControlador controlTurno = new EjercerTurnoControlador();
+
     public DLGPartida(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -27,6 +31,8 @@ public class DLGPartida extends javax.swing.JDialog {
         this.panelJugador2.setBackground(c);
         this.panelJugador3.setBackground(c);
         this.panelJugador4.setBackground(c);
+
+        numJugadores = 3;
 
         this.setVisible(true);
     }
@@ -136,10 +142,10 @@ public class DLGPartida extends javax.swing.JDialog {
                 iniciaActionPerformed(evt);
             }
         });
-        panel.add(inicia, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 470, 110, 50));
+        panel.add(inicia, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 490, 100, 30));
 
         lblTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Titulo.png"))); // NOI18N
-        panel.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, 240, 70));
+        panel.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 70, 240, 70));
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btnCerrar.png"))); // NOI18N
         btnSalir.setBorder(null);
@@ -226,15 +232,12 @@ public class DLGPartida extends javax.swing.JDialog {
 
         tablero.setBackground(new java.awt.Color(255, 255, 255));
         tablero.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tableroMousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                tableroMouseReleased(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableroMouseClicked(evt);
             }
         });
         tablero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panel.add(tablero, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 700, 530));
+        panel.add(tablero, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 650, 650));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/BGNormal.png"))); // NOI18N
         panel.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 680));
@@ -330,35 +333,44 @@ public class DLGPartida extends javax.swing.JDialog {
     }//GEN-LAST:event_colorJugador4ActionPerformed
 
     private void iniciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciaActionPerformed
-        pintaTablero(20);
+
+        int tam = 0;
+        if (numJugadores == 2) {
+            tam = 10;
+        } else if (numJugadores == 3) {
+            tam = 20;
+        } else if (numJugadores == 4) {
+            tam = 40;
+        }
+
+        this.puntos = new Point[tam][tam];
+        pintaTablero(tam);
         this.inicia.setVisible(false);
 
     }//GEN-LAST:event_iniciaActionPerformed
 
-    private void tableroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableroMousePressed
-        int x1 = evt.getX();
-        int y1 = evt.getY();
+    private void tableroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableroMouseClicked
+        click++;
+        int x = evt.getX();
+        int y = evt.getY();
+        if (click == 1) {
+            start.setLocation(x, y);
+        } else if (click == 2) {
+            end.setLocation(x, y);
 
-        start.setLocation(x1, y1);
+            Point exacto[] = controlTurno.validaLinea(start, end, puntos);
 
-    }//GEN-LAST:event_tableroMousePressed
+            if (exacto[0] != null && exacto[1] != null) {
+                pintaLinea(exacto[0], exacto[1]);
 
-    private void tableroMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableroMouseReleased
-        int x1 = evt.getX();
-        int y1 = evt.getY();
+            }
 
-        end.setLocation(x1, y1);
-        
-        boolean valida = controlTurno.validaLinea(start, end, disponibles);
-        if(valida){
-            pintaLinea(start, end);
-        }else{
-            System.out.println("badLine");
+            click = 0;
+
         }
-        
-        
 
-    }//GEN-LAST:event_tableroMouseReleased
+
+    }//GEN-LAST:event_tableroMouseClicked
 
     public void pintaTablero(int tam) {
         //---------------------------------------------------
@@ -369,23 +381,27 @@ public class DLGPartida extends javax.swing.JDialog {
         int yT = 10;
 
         double distancia = Math.sqrt(Math.pow((xL - xR), 2) + Math.pow((yT - yT), 2));
-        double dist = distancia / tam;
+        double dist = distancia / (tam - 1);
 
-        for (int i = 0; i <= tam; i++) {
-            for (int j = 0; j <= tam; j++) {
+        for (int i = 0; i <= tam - 1; i++) {
+            for (int j = 0; j <= tam - 1; j++) {
                 g.fillOval((int) (xL + dist * j), (int) (yT + dist * i), 5, 5);
                 Point punto = new Point((int) (xL + dist * j), (int) (yT + dist * i));
-                puntos.add(punto);
+                
+                puntos[i][j] = punto;
 
             }
         }
-
-        for (Point p : puntos) {
-            disponibles.add(p);
+        
+        
+        for (int i = 0; i < puntos.length; i++) {
+            for (int j = 0; j < puntos[0].length; j++) {
+                System.out.print("["+puntos[i][j].getX()+", "+puntos[i][j].getY()+"]");
+            }
+            System.out.println("");
         }
+        
 
-        
-        
         this.tablero.paintComponents(g);
         //---------------------------------------------------
     }
