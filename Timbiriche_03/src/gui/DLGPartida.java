@@ -5,7 +5,10 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
+import objNegocios.Figura;
 import objNegocios.Jugador;
+import objNegocios.Linea;
 
 /**
  *
@@ -21,21 +24,19 @@ public class DLGPartida extends javax.swing.JDialog {
     int tam;
     Point[][] puntos;
     EjercerTurnoControlador controlTurno = new EjercerTurnoControlador();
-    Jugador jugador;
+    ArrayList<Jugador> jugadores;
 
-    public DLGPartida(java.awt.Frame parent, boolean modal, Jugador jugador) {
+    int jugador = 0;
+
+    public DLGPartida(java.awt.Frame parent, boolean modal, ArrayList<Jugador> jugadores) {
         super(parent, modal);
         initComponents();
 
-        
-        this.jugador= jugador;
-        System.out.println(jugador.getNombre());
-        Color c = new Color(0, 0, 0, 0);
-        this.panelJugador1.setBackground(c);
-        this.panelJugador2.setBackground(c);
-        this.panelJugador3.setBackground(c);
-        this.panelJugador4.setBackground(c);
+        this.jugadores = jugadores;
 
+        iniciaConfiguracion(jugadores.get(0), 1);
+        iniciaConfiguracion(jugadores.get(1), 2);
+        iniciaConfiguracion(jugadores.get(2), 3);
         numJugadores = 3;
 
         this.setVisible(true);
@@ -62,7 +63,6 @@ public class DLGPartida extends javax.swing.JDialog {
         inicia = new javax.swing.JButton();
         lblTitulo = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
-        btnMinimizar = new javax.swing.JButton();
         lblJ1Puntaje = new javax.swing.JLabel();
         lblJ1Nombre = new javax.swing.JLabel();
         lblJugador1Puntaje = new javax.swing.JLabel();
@@ -135,10 +135,10 @@ public class DLGPartida extends javax.swing.JDialog {
             }
         });
         panel.add(colorJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 390, 50, 40));
-        panel.add(panelJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(839, 384, 50, 50));
-        panel.add(panelJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(839, 244, 50, 50));
-        panel.add(panelJugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(839, 314, 50, 50));
-        panel.add(panelJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(839, 174, 50, 50));
+        panel.add(panelJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(829, 384, 60, 50));
+        panel.add(panelJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(829, 244, 60, 50));
+        panel.add(panelJugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(829, 314, 60, 50));
+        panel.add(panelJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 173, 60, 50));
 
         inicia.setText("Inicia");
         inicia.addActionListener(new java.awt.event.ActionListener() {
@@ -162,18 +162,6 @@ public class DLGPartida extends javax.swing.JDialog {
             }
         });
         panel.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 10, 30, 30));
-
-        btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btnMinimizar.png"))); // NOI18N
-        btnMinimizar.setBorder(null);
-        btnMinimizar.setBorderPainted(false);
-        btnMinimizar.setContentAreaFilled(false);
-        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnMinimizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMinimizarActionPerformed(evt);
-            }
-        });
-        panel.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 10, 30, 30));
 
         lblJ1Puntaje.setForeground(new java.awt.Color(204, 204, 204));
         lblJ1Puntaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -255,10 +243,6 @@ public class DLGPartida extends javax.swing.JDialog {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
-
-    private void btnMinimizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinimizarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMinimizarActionPerformed
 
     private void colorJugador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJugador1ActionPerformed
         StringBuffer colores = new StringBuffer();
@@ -372,14 +356,46 @@ public class DLGPartida extends javax.swing.JDialog {
             Point exacto[] = controlTurno.validaLinea(start, end, puntos, (int) dist);
 
             if (exacto[0] != null && exacto[1] != null) {
-                pintaLinea(exacto[0], exacto[1]);
+                pintaLinea(exacto[0], exacto[1], jugadores.get(0).getColor());
+
+                int x1 = (int) exacto[0].getX();
+                int y1 = (int) exacto[0].getY();
+                int x2 = (int) exacto[1].getX();
+                int y2 = (int) exacto[1].getY();
+
+                jugador++;
+
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    System.out.println(e);
+                }
+
+                if (jugador == 1) {
+
+                    Point startAux = exacto[0];
+                    Point endAux = exacto[1];
+
+                    startAux.setLocation(startAux.getX(), startAux.getY());
+                    endAux.setLocation(endAux.getX() + 32, startAux.getY());
+                    pintaLinea(startAux, endAux, jugadores.get(1).getColor());
+
+                }
+                if (jugador == 2) {
+
+                    Point startAux = exacto[0];
+                    Point endAux = exacto[1];
+
+                    startAux.setLocation(10, 10);
+                    endAux.setLocation(10, 42);
+
+                    pintaLinea(startAux, endAux, jugadores.get(2).getColor());
+
+                }
 
             }
-
             click = 0;
-
         }
-
 
     }//GEN-LAST:event_tableroMouseClicked
 
@@ -415,17 +431,39 @@ public class DLGPartida extends javax.swing.JDialog {
         //---------------------------------------------------
     }
 
-    public void pintaLinea(Point s, Point e) {
+    public void pintaLinea(Point s, Point e, Color color) {
         Graphics2D g = (Graphics2D) tablero.getGraphics();
+        g.setColor(color);
         g.drawLine((int) s.getX(), (int) s.getY(), (int) e.getX(), (int) e.getY());
         this.tablero.paintComponents(g);
 
     }
 
+    public void iniciaConfiguracion(Jugador j, int numJugador) {
+        try {
+            if (numJugador == 1) {
+                this.lblJ1Nombre.setText(j.getNombre());
+                this.panelJugador1.setBackground(j.getColor());
+            }
+            if (numJugador == 2) {
+                this.lblJ2Nombre.setText(j.getNombre());
+                this.panelJugador2.setBackground(j.getColor());
+            }
+            if (numJugador == 3) {
+                this.lblJ3Nombre.setText(j.getNombre());
+                this.panelJugador3.setBackground(j.getColor());
+            }
+            if (numJugador == 4) {
+                this.lblJ4Nombre.setText(j.getNombre());
+                this.panelJugador4.setBackground(j.getColor());
+            }
+        } catch (Exception e) {
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAbandonar;
-    private javax.swing.JButton btnMinimizar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton colorJugador1;
     private javax.swing.JButton colorJugador2;
