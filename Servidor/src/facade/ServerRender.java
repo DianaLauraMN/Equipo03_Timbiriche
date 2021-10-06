@@ -1,14 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package facade;
 
-/**
- *
- * @author Hector Zapata
- */
+import java.util.ArrayList;
+import logica.Server;
+import objNegocios.Jugador;
+
+
 public class ServerRender {
+    private static ServerRender sr=null;   
+    private static Server server ;
+
     
+    private ServerRender(){}
+    public static ServerRender getInstancia(){
+        if(sr==null){
+            sr = new ServerRender();
+            server = new Server();
+        }
+        return sr;
+    }
+    
+    
+    public ArrayList<Jugador> renderJugadores(){
+         return server.jugadoresListos();
+    } 
 }

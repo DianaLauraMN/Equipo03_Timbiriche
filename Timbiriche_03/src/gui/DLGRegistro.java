@@ -1,37 +1,35 @@
-
 package gui;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
+import java.util.ArrayList;
 import objNegocios.Jugador;
 
 public class DLGRegistro extends javax.swing.JDialog {
-    Jugador jugador;
-    
-    /**
-     * Creates new form Registro
-     */
-    public DLGRegistro(java.awt.Frame parent, boolean modal, Jugador jugador) {
+
+    ArrayList<Jugador> jugadores;
+
+    public DLGRegistro(java.awt.Frame parent, boolean modal, ArrayList<Jugador> jugadores) {
         super(parent, modal);
         initComponents();
-        
+        this.jugadores = jugadores;
+
         this.getRootPane().setOpaque(false);
         this.getContentPane().setBackground(new Color(0, 0, 0, 0));
         this.setBackground(new Color(0, 0, 0, 0));
-        
         this.panel.getRootPane().setOpaque(false);
         this.panel.setBackground(new Color(0, 0, 0, 0));
-        this.jugador = jugador;
-        Color c = new Color(0, 0, 0, 0);
-        this.panelJugador1.setBackground(c);
-        this.panelJugador2.setBackground(c);
-        this.panelJugador3.setBackground(c);
-        this.panelJugador4.setBackground(c);
-        
+
+        try {
+            this.panelJugador1.setBackground(jugadores.get(0).getColor());
+            this.panelJugador2.setBackground(jugadores.get(1).getColor());
+            this.panelJugador3.setBackground(jugadores.get(2).getColor());
+            this.panelJugador4.setBackground(jugadores.get(3).getColor());
+        } catch (Exception e) {
+        }
         this.setVisible(true);
+
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -61,16 +59,24 @@ public class DLGRegistro extends javax.swing.JDialog {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelJugador2.setBackground(new java.awt.Color(255, 255, 255));
         panel.add(panelJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(383, 226, 110, 110));
+
+        panelJugador3.setBackground(new java.awt.Color(255, 255, 255));
         panel.add(panelJugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(613, 226, 110, 110));
+
+        panelJugador4.setBackground(new java.awt.Color(255, 255, 255));
         panel.add(panelJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(843, 226, 110, 110));
+
+        panelJugador1.setBackground(new java.awt.Color(255, 255, 255));
         panel.add(panelJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 226, 110, 110));
 
         colorJugador1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btnColor_1.png"))); // NOI18N
         colorJugador1.setBorder(null);
         colorJugador1.setBorderPainted(false);
         colorJugador1.setContentAreaFilled(false);
-        colorJugador1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        colorJugador1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         colorJugador1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 colorJugador1ActionPerformed(evt);
@@ -82,7 +88,7 @@ public class DLGRegistro extends javax.swing.JDialog {
         colorJugador2.setBorder(null);
         colorJugador2.setBorderPainted(false);
         colorJugador2.setContentAreaFilled(false);
-        colorJugador2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        colorJugador2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         colorJugador2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 colorJugador2ActionPerformed(evt);
@@ -94,7 +100,7 @@ public class DLGRegistro extends javax.swing.JDialog {
         colorJugador3.setBorder(null);
         colorJugador3.setBorderPainted(false);
         colorJugador3.setContentAreaFilled(false);
-        colorJugador3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        colorJugador3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         colorJugador3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 colorJugador3ActionPerformed(evt);
@@ -106,7 +112,7 @@ public class DLGRegistro extends javax.swing.JDialog {
         colorJugador4.setBorder(null);
         colorJugador4.setBorderPainted(false);
         colorJugador4.setContentAreaFilled(false);
-        colorJugador4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        colorJugador4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         colorJugador4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 colorJugador4ActionPerformed(evt);
@@ -132,18 +138,13 @@ public class DLGRegistro extends javax.swing.JDialog {
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
         panel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 10, 30, 30));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btnIniciar.png"))); // NOI18N
         jButton2.setBorder(null);
         jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -176,94 +177,65 @@ public class DLGRegistro extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      dispose();
+        dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         DLGPartida dlgpartida = new DLGPartida(null, true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void colorJugador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJugador1ActionPerformed
-       StringBuffer colores = new StringBuffer();
+        StringBuffer colores = new StringBuffer();
         DLGColor dlg = new DLGColor(null, true, colores);
-
         String coloresPos[] = colores.toString().split(",");
         int coloresInt[] = {
             Integer.parseInt(coloresPos[0]),
             Integer.parseInt(coloresPos[1]),
             Integer.parseInt(coloresPos[2])
         };
-
-        Graphics2D g = (Graphics2D) this.panelJugador1.getGraphics();
         Color colorJugador = new Color(coloresInt[0], coloresInt[1], coloresInt[2]);
-        g.setColor(colorJugador);
-
-        g.fillOval(0, 0, 101, 101);
-        this.panelJugador1.paintComponents(g);
+        this.panelJugador1.setBackground(colorJugador);
     }//GEN-LAST:event_colorJugador1ActionPerformed
 
     private void colorJugador2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJugador2ActionPerformed
-          StringBuffer colores = new StringBuffer();
+        StringBuffer colores = new StringBuffer();
         DLGColor dlg = new DLGColor(null, true, colores);
-
         String coloresPos[] = colores.toString().split(",");
         int coloresInt[] = {
             Integer.parseInt(coloresPos[0]),
             Integer.parseInt(coloresPos[1]),
             Integer.parseInt(coloresPos[2])
         };
-
-        Graphics2D g = (Graphics2D) this.panelJugador2.getGraphics();
         Color colorJugador = new Color(coloresInt[0], coloresInt[1], coloresInt[2]);
-        g.setColor(colorJugador);
-
-        g.fillOval(0, 0, 101, 101);
-        this.panelJugador2.paintComponents(g);
+        this.panelJugador2.setBackground(colorJugador);
     }//GEN-LAST:event_colorJugador2ActionPerformed
 
     private void colorJugador3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJugador3ActionPerformed
-         StringBuffer colores = new StringBuffer();
+        StringBuffer colores = new StringBuffer();
         DLGColor dlg = new DLGColor(null, true, colores);
-
         String coloresPos[] = colores.toString().split(",");
         int coloresInt[] = {
             Integer.parseInt(coloresPos[0]),
             Integer.parseInt(coloresPos[1]),
             Integer.parseInt(coloresPos[2])
         };
-
-        Graphics2D g = (Graphics2D) this.panelJugador3.getGraphics();
         Color colorJugador = new Color(coloresInt[0], coloresInt[1], coloresInt[2]);
-        g.setColor(colorJugador);
-
-        g.fillOval(0, 0, 101, 101);
-        this.panelJugador3.paintComponents(g);
+        this.panelJugador3.setBackground(colorJugador);
     }//GEN-LAST:event_colorJugador3ActionPerformed
 
     private void colorJugador4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJugador4ActionPerformed
-         StringBuffer colores = new StringBuffer();
+        StringBuffer colores = new StringBuffer();
         DLGColor dlg = new DLGColor(null, true, colores);
-
         String coloresPos[] = colores.toString().split(",");
         int coloresInt[] = {
             Integer.parseInt(coloresPos[0]),
             Integer.parseInt(coloresPos[1]),
             Integer.parseInt(coloresPos[2])
         };
-
-        Graphics2D g = (Graphics2D) this.panelJugador4.getGraphics();
         Color colorJugador = new Color(coloresInt[0], coloresInt[1], coloresInt[2]);
-        g.setColor(colorJugador);
-
-        g.fillOval(0, 0, 101, 101);
-        this.panelJugador4.paintComponents(g);
+        this.panelJugador4.setBackground(colorJugador);
     }//GEN-LAST:event_colorJugador4ActionPerformed
-
-
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel FONDO;
     private javax.swing.JButton colorJugador1;

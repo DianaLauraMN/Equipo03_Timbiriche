@@ -1,5 +1,6 @@
 package gui;
 
+import controles.UnirsePartidaControlador;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -8,22 +9,23 @@ import objNegocios.Configuracion;
 import objNegocios.Jugador;
 
 public class DLGUnirsePartida extends javax.swing.JDialog {
-
+    
     Color colorJugador;
-
+    UnirsePartidaControlador control = new UnirsePartidaControlador();
+    
     public DLGUnirsePartida(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
+        
         this.panel.getRootPane().setOpaque(false);
         this.panel.setBackground(new Color(0, 0, 0, 0));
         btnColorea.setEnabled(false);
         BtnUnirse.setEnabled(false);
-        Color c = new Color(0, 0, 0, 0);
+        Color c = new Color(255, 255, 255);
         this.pnl.setBackground(c);
         this.setVisible(true);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -129,59 +131,59 @@ public class DLGUnirsePartida extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void BtnUnirseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUnirseActionPerformed
+        
         Jugador jugador = new Jugador(txtNombreJugador.getText(), colorJugador, 0);
         Configuracion configuracion = new Configuracion(colorJugador, jugador);
         List<Configuracion> configuraciones = new ArrayList<>();
         configuraciones.add(configuracion);
         jugador.setConfiguraciones(configuraciones);
-        DLGRegistro dlgRegistro = new DLGRegistro(null, true, jugador);
-
+        
+        
+        
+        control.unirsePartida(jugador);
     }//GEN-LAST:event_BtnUnirseActionPerformed
 
     private void btnColoreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColoreaActionPerformed
-
+        
         StringBuffer colores = new StringBuffer();
         DLGColor dlg = new DLGColor(null, true, colores);
-
+        
         String coloresPos[] = colores.toString().split(",");
         int coloresInt[] = {
             Integer.parseInt(coloresPos[0]),
             Integer.parseInt(coloresPos[1]),
             Integer.parseInt(coloresPos[2])
         };
-
+        
         Graphics2D g = (Graphics2D) this.pnl.getGraphics();
-        colorJugador = new Color(coloresInt[0], coloresInt[1], coloresInt[2]);
-        g.setColor(colorJugador);
-
-        g.fillOval(0, 0, 101, 101);
-        this.pnl.paintComponents(g);
-
+        colorJugador = new Color(coloresInt[0], coloresInt[1], coloresInt[2]);        
+        this.pnl.setBackground(colorJugador);
+        
         if (coloresInt[0] == 255 && coloresInt[1] == 255 && coloresInt[2] == 255) {
             BtnUnirse.setEnabled(false);
         } else {
             BtnUnirse.setEnabled(true);
         }
-
+        
         camposCompletos();
     }//GEN-LAST:event_btnColoreaActionPerformed
 
     private void txtNombreJugadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreJugadorKeyReleased
         String nombre = txtNombreJugador.getText();
         nombre = nombre.trim();
-
+        
         if (nombre.isEmpty()) {
             btnColorea.setEnabled(false);
         } else {
             btnColorea.setEnabled(true);
         }
-
+        
         camposCompletos();
     }//GEN-LAST:event_txtNombreJugadorKeyReleased
-
+    
     public boolean camposCompletos() {
         Color color = new Color(255, 255, 255);
-
+        
         if (colorJugador != null) {
             if (color.getRGB() == colorJugador.getRGB() || this.txtNombreJugador.getText().trim().isEmpty()) {
                 this.BtnUnirse.setEnabled(false);
