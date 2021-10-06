@@ -26,7 +26,7 @@ public class ServerRender {
          return server.jugadoresListos();
     } 
     
-    public boolean aprobacionPartida(JLabel lb1, JLabel lb2){
-        return server.aprobacionPartida(lb1, lb2);
+    public boolean aprobacionPartida(){
+        return server.aprobacionPartida();
     }
 }

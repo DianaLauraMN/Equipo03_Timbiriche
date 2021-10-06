@@ -1,5 +1,6 @@
 package gui;
 
+import controles.ComenzarPartidaControlador;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import objNegocios.Jugador;
 public class DLGRegistro extends javax.swing.JDialog {
 
     ArrayList<Jugador> jugadores;
+    ComenzarPartidaControlador control = new ComenzarPartidaControlador();
 
     public DLGRegistro(java.awt.Frame parent, boolean modal, ArrayList<Jugador> jugadores) {
         super(parent, modal);
@@ -31,9 +33,6 @@ public class DLGRegistro extends javax.swing.JDialog {
         }
         llenaCampos(jugadores);
 
-        if (btnIniciar.isEnabled()) {
-            jLabel1.setIcon(new ImageIcon("src/img/CartaJugador-acepto.png"));
-        }
         this.setVisible(true);
 
     }
@@ -262,19 +261,18 @@ public class DLGRegistro extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-//       Color color = new Color(panelJugador1.getColorModel().getRGB(0));
-//       Jugador jugador = new Jugador(txtJ1Nombre.getText(), color, 0);
-//        Configuracion configuracion = new Configuracion(colorJugador, jugador);
-//        List<Configuracion> configuraciones = new ArrayList<>();
-//        configuraciones.add(configuracion);
-//        jugador.setConfiguraciones(configuraciones);
-//        
-//        
-//        
-//        control.unirsePartida(jugador);
-        
-        DLGPartida dlgpartida = new DLGPartida(null, true);
 
+        jLabel1.setIcon(new ImageIcon("src/img/CartaJugador-acepto.png"));
+
+        try {
+            Thread.sleep(2000);
+            jLabel3.setIcon(new ImageIcon("src/img/CartaJugador-acepto.png"));
+            Thread.sleep(2000);
+            jLabel2.setIcon(new ImageIcon("src/img/CartaJugador-acepto.png"));
+
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void colorJugador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJugador1ActionPerformed

@@ -36,17 +36,9 @@ public class Server {
 
     }
 
-    public boolean aprobacionPartida(JLabel lb1, JLabel lb2) {
+    public boolean aprobacionPartida() {
         try {
-            if (lb1 != null) {
-                Thread.sleep(2000);
-                lb1.setIcon(new ImageIcon("src/img/CartaJugador-acepto.png"));
-            }
-            if (lb2 != null) {
-                Thread.sleep(2000);
-                lb2.setIcon(new ImageIcon("src/img/CartaJugador-acepto.png"));
-            }
-
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             System.out.println(e);
         }
