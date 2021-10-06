@@ -2,6 +2,7 @@
 package facade;
 
 import java.util.ArrayList;
+import javax.swing.JLabel;
 import logica.Server;
 import objNegocios.Jugador;
 
@@ -24,4 +25,8 @@ public class ServerRender {
     public ArrayList<Jugador> renderJugadores(){
          return server.jugadoresListos();
     } 
+    
+    public boolean aprobacionPartida(){
+        return server.aprobacionPartida();
+    }
 }

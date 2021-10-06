@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.ArrayList;
+import objNegocios.Jugador;
 
 /**
  *
@@ -19,13 +20,16 @@ public class DLGPartida extends javax.swing.JDialog {
     int click = 0;
     int tam;
     Point[][] puntos;
-
     EjercerTurnoControlador controlTurno = new EjercerTurnoControlador();
+    Jugador jugador;
 
-    public DLGPartida(java.awt.Frame parent, boolean modal) {
+    public DLGPartida(java.awt.Frame parent, boolean modal, Jugador jugador) {
         super(parent, modal);
         initComponents();
 
+        
+        this.jugador= jugador;
+        System.out.println(jugador.getNombre());
         Color c = new Color(0, 0, 0, 0);
         this.panelJugador1.setBackground(c);
         this.panelJugador2.setBackground(c);
@@ -88,7 +92,7 @@ public class DLGPartida extends javax.swing.JDialog {
         colorJugador1.setBorder(null);
         colorJugador1.setBorderPainted(false);
         colorJugador1.setContentAreaFilled(false);
-        colorJugador1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        colorJugador1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         colorJugador1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 colorJugador1ActionPerformed(evt);
@@ -100,7 +104,7 @@ public class DLGPartida extends javax.swing.JDialog {
         colorJugador2.setBorder(null);
         colorJugador2.setBorderPainted(false);
         colorJugador2.setContentAreaFilled(false);
-        colorJugador2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        colorJugador2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         colorJugador2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 colorJugador2ActionPerformed(evt);
@@ -112,7 +116,7 @@ public class DLGPartida extends javax.swing.JDialog {
         colorJugador3.setBorder(null);
         colorJugador3.setBorderPainted(false);
         colorJugador3.setContentAreaFilled(false);
-        colorJugador3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        colorJugador3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         colorJugador3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 colorJugador3ActionPerformed(evt);
@@ -124,7 +128,7 @@ public class DLGPartida extends javax.swing.JDialog {
         colorJugador4.setBorder(null);
         colorJugador4.setBorderPainted(false);
         colorJugador4.setContentAreaFilled(false);
-        colorJugador4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        colorJugador4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         colorJugador4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 colorJugador4ActionPerformed(evt);
