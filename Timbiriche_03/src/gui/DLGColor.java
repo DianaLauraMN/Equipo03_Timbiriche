@@ -7,14 +7,16 @@ package gui;
 
 import java.awt.Color;
 
-/**
- *
- * @author Hector Zapata
- */
 public class DLGColor extends javax.swing.JDialog {
 
     private StringBuffer color;
 
+    /**
+     * Metodo constructor
+     * @param parent
+     * @param modal
+     * @param color 
+     */
     public DLGColor(java.awt.Frame parent, boolean modal, StringBuffer color) {
         super(parent, modal);
         initComponents();
@@ -78,6 +80,10 @@ public class DLGColor extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método con el que se obtiene el color seleccionado por el jugador
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Color colorInt = this.select.getColor();
         int rojo = colorInt.getRed();

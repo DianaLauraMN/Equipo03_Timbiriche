@@ -11,10 +11,10 @@ public class Server {
 
     public ArrayList<Jugador> jugadoresListos() {
         ArrayList<Jugador> jugadores = new ArrayList<>();
-        Jugador jugador1 = new Jugador("Messi", Color.cyan, 0);
+        Jugador jugador1 = new Jugador("Messi", Color.YELLOW, 0);
         Jugador jugador2 = new Jugador("Killua", Color.GREEN, 0);
 
-        Configuracion c1 = new Configuracion(Color.cyan, jugador1);
+        Configuracion c1 = new Configuracion(Color.YELLOW, jugador1);
         Configuracion c2 = new Configuracion(Color.GREEN, jugador2);
         ArrayList<Configuracion> configuraciones = new ArrayList<>();
         configuraciones.add(c1);

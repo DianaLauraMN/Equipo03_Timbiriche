@@ -2,6 +2,7 @@ package gui;
 
 import controles.EjercerTurnoControlador;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -10,16 +11,12 @@ import objNegocios.Figura;
 import objNegocios.Jugador;
 import objNegocios.Linea;
 
-/**
- *
- * @author dlmn5
- */
 public class DLGPartida extends javax.swing.JDialog {
 
     Point start = new Point();
     Point end = new Point();
     int numJugadores;
-
+    List<Figura> lineasJugador = new ArrayList();
     int click = 0;
     int tam;
     Point[][] puntos;
@@ -28,6 +25,12 @@ public class DLGPartida extends javax.swing.JDialog {
 
     int jugador = 0;
 
+    /**
+     * Método constructor del DLGPartida
+     * @param parent 
+     * @param modal
+     * @param jugadores 
+     */
     public DLGPartida(java.awt.Frame parent, boolean modal, ArrayList<Jugador> jugadores) {
         super(parent, modal);
         initComponents();
@@ -220,6 +223,11 @@ public class DLGPartida extends javax.swing.JDialog {
         btnAbandonar.setBorderPainted(false);
         btnAbandonar.setContentAreaFilled(false);
         btnAbandonar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnAbandonar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAbandonarActionPerformed(evt);
+            }
+        });
         panel.add(btnAbandonar, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 600, 170, 50));
 
         tablero.setBackground(new java.awt.Color(255, 255, 255));
@@ -240,10 +248,18 @@ public class DLGPartida extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método oyente del boton "Salir"
+     * @param evt 
+     */
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    /**
+     * Método que obtiene el color del jugador #1
+     * @param evt 
+     */
     private void colorJugador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJugador1ActionPerformed
         StringBuffer colores = new StringBuffer();
         DLGColor dlg = new DLGColor(null, true, colores);
@@ -263,6 +279,10 @@ public class DLGPartida extends javax.swing.JDialog {
         this.panelJugador1.paintComponents(g);
     }//GEN-LAST:event_colorJugador1ActionPerformed
 
+    /**
+     * Método que obtiene el color del jugador #2
+     * @param evt 
+     */
     private void colorJugador2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJugador2ActionPerformed
         StringBuffer colores = new StringBuffer();
         DLGColor dlg = new DLGColor(null, true, colores);
@@ -282,6 +302,10 @@ public class DLGPartida extends javax.swing.JDialog {
         this.panelJugador2.paintComponents(g);
     }//GEN-LAST:event_colorJugador2ActionPerformed
 
+    /**
+     * Método que obtiene el color del jugador #3
+     * @param evt 
+     */
     private void colorJugador3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJugador3ActionPerformed
         StringBuffer colores = new StringBuffer();
         DLGColor dlg = new DLGColor(null, true, colores);
@@ -301,6 +325,10 @@ public class DLGPartida extends javax.swing.JDialog {
         this.panelJugador3.paintComponents(g);
     }//GEN-LAST:event_colorJugador3ActionPerformed
 
+    /**
+     * Método que obtiene el color del jugador #4
+     * @param evt 
+     */
     private void colorJugador4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorJugador4ActionPerformed
         StringBuffer colores = new StringBuffer();
         DLGColor dlg = new DLGColor(null, true, colores);
@@ -320,6 +348,10 @@ public class DLGPartida extends javax.swing.JDialog {
         this.panelJugador4.paintComponents(g);
     }//GEN-LAST:event_colorJugador4ActionPerformed
 
+    /**
+     * Método que inicia el tablero para la partida 
+     * @param evt 
+     */
     private void iniciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciaActionPerformed
 
         tam = 0;
@@ -337,6 +369,10 @@ public class DLGPartida extends javax.swing.JDialog {
 
     }//GEN-LAST:event_iniciaActionPerformed
 
+    /**
+     * Método en el cual se crean las lineas del turno del jugador
+     * @param evt 
+     */
     private void tableroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableroMouseClicked
         click++;
         int x = evt.getX();
@@ -357,12 +393,14 @@ public class DLGPartida extends javax.swing.JDialog {
 
             if (exacto[0] != null && exacto[1] != null) {
                 pintaLinea(exacto[0], exacto[1], jugadores.get(0).getColor());
-
+                Figura lineaJ = new Linea((int)exacto[0].getX(), (int)exacto[1].getY(),(int) exacto[1].getX(),(int) exacto[1].getY());          
+                lineasJugador.add(lineaJ);
+                
                 int x1 = (int) exacto[0].getX();
                 int y1 = (int) exacto[0].getY();
                 int x2 = (int) exacto[1].getX();
                 int y2 = (int) exacto[1].getY();
-
+                
                 jugador++;
 
                 try {
@@ -379,7 +417,7 @@ public class DLGPartida extends javax.swing.JDialog {
                     startAux.setLocation(startAux.getX(), startAux.getY());
                     endAux.setLocation(endAux.getX() + 32, startAux.getY());
                     pintaLinea(startAux, endAux, jugadores.get(1).getColor());
-
+                    
                 }
                 if (jugador == 2) {
 
@@ -390,7 +428,7 @@ public class DLGPartida extends javax.swing.JDialog {
                     endAux.setLocation(10, 42);
 
                     pintaLinea(startAux, endAux, jugadores.get(2).getColor());
-
+                    
                 }
 
             }
@@ -399,6 +437,18 @@ public class DLGPartida extends javax.swing.JDialog {
 
     }//GEN-LAST:event_tableroMouseClicked
 
+    /**
+     * Método del boton "Abandonar" para que el jugador salga de la partida
+     * @param evt 
+     */
+    private void btnAbandonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbandonarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnAbandonarActionPerformed
+
+    /**
+     * Método que crea el tablero (sin puntos)
+     * @param tam 
+     */
     public void pintaTablero(int tam) {
         //---------------------------------------------------
 
@@ -431,6 +481,12 @@ public class DLGPartida extends javax.swing.JDialog {
         //---------------------------------------------------
     }
 
+    /**
+     * Mátodo que pinta la linea en el tablero
+     * @param s
+     * @param e
+     * @param color 
+     */
     public void pintaLinea(Point s, Point e, Color color) {
         Graphics2D g = (Graphics2D) tablero.getGraphics();
         g.setColor(color);
@@ -438,7 +494,12 @@ public class DLGPartida extends javax.swing.JDialog {
         this.tablero.paintComponents(g);
 
     }
-
+    
+    /**
+     * Método que crea y guarda la configuración para los jugadores
+     * @param j
+     * @param numJugador 
+     */
     public void iniciaConfiguracion(Jugador j, int numJugador) {
         try {
             if (numJugador == 1) {
