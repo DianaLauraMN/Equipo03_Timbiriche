@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
+import controles.EjercerTurnoControlador;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,20 +12,15 @@ import java.awt.Point;
  */
 public class DLGPartida extends javax.swing.JDialog {
 
-    /**
-     * Creates new form DLGPartida
-     *
-     * @param parent
-     * @param modal
-     */
     Point start = new Point();
     Point end = new Point();
 
+    ArrayList<Point> puntos = new ArrayList<>();
+    ArrayList<Point> disponibles = new ArrayList<>();
+    EjercerTurnoControlador controlTurno = new EjercerTurnoControlador();
     public DLGPartida(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
-        
 
         Color c = new Color(0, 0, 0, 0);
         this.panelJugador1.setBackground(c);
@@ -340,23 +332,32 @@ public class DLGPartida extends javax.swing.JDialog {
     private void iniciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciaActionPerformed
         pintaTablero(20);
         this.inicia.setVisible(false);
+
     }//GEN-LAST:event_iniciaActionPerformed
 
     private void tableroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableroMousePressed
         int x1 = evt.getX();
         int y1 = evt.getY();
-        
+
         start.setLocation(x1, y1);
 
     }//GEN-LAST:event_tableroMousePressed
 
     private void tableroMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableroMouseReleased
-       int x1 = evt.getX();
+        int x1 = evt.getX();
         int y1 = evt.getY();
-        
+
         end.setLocation(x1, y1);
-        pintaLinea(start, end);
         
+        boolean valida = controlTurno.validaLinea(start, end, disponibles);
+        if(valida){
+            pintaLinea(start, end);
+        }else{
+            System.out.println("badLine");
+        }
+        
+        
+
     }//GEN-LAST:event_tableroMouseReleased
 
     public void pintaTablero(int tam) {
@@ -373,20 +374,27 @@ public class DLGPartida extends javax.swing.JDialog {
         for (int i = 0; i <= tam; i++) {
             for (int j = 0; j <= tam; j++) {
                 g.fillOval((int) (xL + dist * j), (int) (yT + dist * i), 5, 5);
+                Point punto = new Point((int) (xL + dist * j), (int) (yT + dist * i));
+                puntos.add(punto);
+
             }
         }
+
+        for (Point p : puntos) {
+            disponibles.add(p);
+        }
+
+        
+        
         this.tablero.paintComponents(g);
         //---------------------------------------------------
     }
 
-    public void pintaLinea( Point s, Point e) {
+    public void pintaLinea(Point s, Point e) {
         Graphics2D g = (Graphics2D) tablero.getGraphics();
         g.drawLine((int) s.getX(), (int) s.getY(), (int) e.getX(), (int) e.getY());
         this.tablero.paintComponents(g);
-        
-       
-     
-       
+
     }
 
 
