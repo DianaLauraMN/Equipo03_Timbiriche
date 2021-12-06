@@ -1,12 +1,13 @@
 package objNegocios;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 /**
  *
  * @author chris
  */
-public class Configuracion {
+public class Configuracion implements Serializable{
     
     private Color color;
     private Jugador jugador;

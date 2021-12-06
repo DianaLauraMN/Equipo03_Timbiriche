@@ -1,5 +1,6 @@
 package objNegocios;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  *
  * @author chris
  */
-public class Tablero {
+public class Tablero implements Serializable{
     private List lineas ;
     private List cuadrados;
     

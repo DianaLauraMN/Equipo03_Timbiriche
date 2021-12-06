@@ -2,8 +2,9 @@ package objNegocios;
 
 import java.awt.Canvas;
 import java.awt.Graphics;
+import java.io.Serializable;
 
-public abstract class Figura {
+public abstract class Figura implements Serializable{
 
     protected int x;
     protected int y;

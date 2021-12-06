@@ -1,6 +1,7 @@
 package objNegocios;
 
 import java.awt.Color;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  *
  * @author chris
  */
-public class Jugador {
+public class Jugador implements Serializable{
 
     private int id;
     private String nombre;
@@ -16,6 +17,7 @@ public class Jugador {
     private List figuras;
     private int puntaje;
     private List<Configuracion> configuraciones;
+    private String ip;
 
     public Jugador() {
         this.figuras = new ArrayList<>();
@@ -76,6 +78,15 @@ public class Jugador {
     public void setConfiguraciones(List<Configuracion> configuraciones) {
         this.configuraciones = configuraciones;
     }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+    
     
     
     @Override

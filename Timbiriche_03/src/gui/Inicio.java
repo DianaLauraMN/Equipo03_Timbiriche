@@ -2,9 +2,12 @@
 package gui;
 
 import java.awt.Color;
+import java.io.ObjectInputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 
-public class Inicio extends javax.swing.JFrame {
+public class Inicio extends javax.swing.JFrame{
 
     /**
      * Metodo constructor
@@ -141,5 +144,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
 
 }

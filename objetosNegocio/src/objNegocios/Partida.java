@@ -1,5 +1,6 @@
 package objNegocios;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,13 +8,14 @@ import java.util.List;
  *
  * @author chris
  */
-public class Partida {
-    
+public class Partida implements Serializable {
+
     private Tablero tablero;
     private Boolean estadoPartida;
     private List<Jugador> jugadore;
-    
-    public Partida(){
+    private int turnoJugador;
+
+    public Partida() {
         this.jugadore = new ArrayList<>();
     }
 
@@ -46,8 +48,18 @@ public class Partida {
     public void setJugadore(List<Jugador> jugadore) {
         this.jugadore = jugadore;
     }
-    
-    
-    
-    
+
+    public int getTurnoJugador() {
+        return turnoJugador;
+    }
+
+    public void setTurnoJugador(int turnoJugador) {
+        this.turnoJugador = turnoJugador;
+    }
+
+    @Override
+    public String toString() {
+        return "Partida{" + "tablero=" + tablero + ", estadoPartida=" + estadoPartida + ", jugadore=" + jugadore + ", turnoJugador=" + turnoJugador + '}';
+    }
+
 }

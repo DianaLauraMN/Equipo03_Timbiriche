@@ -1,7 +1,6 @@
 package gui;
 
 import controles.ComenzarPartidaControlador;
-import facade.ServerRender;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -514,5 +513,5 @@ public class DLGRegistro extends javax.swing.JDialog {
     private javax.swing.JTextField txtJ3Nombre;
     private javax.swing.JTextField txtJ4Nombre;
     // End of variables declaration//GEN-END:variables
-    private ServerRender sr = ServerRender.getInstancia();
+   
 }
